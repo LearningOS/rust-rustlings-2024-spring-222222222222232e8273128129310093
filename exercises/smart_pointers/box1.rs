@@ -18,11 +18,11 @@
 //
 // Execute `rustlings hint box1` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
+
 
 #[derive(PartialEq, Debug)]
 pub enum List {
-    Cons(i32, List),
+    Cons(i32, Box<List>), // 使用 Box 包裹 List
     Nil,
 }
 
@@ -35,11 +35,12 @@ fn main() {
 }
 
 pub fn create_empty_list() -> List {
-    todo!()
+    List::Nil
 }
 
 pub fn create_non_empty_list() -> List {
-    todo!()
+    let list = List::Cons(1, Box::new(List::Nil)); // 创建一个包含单个元素的 cons list
+    List::Cons(2, Box::new(list)) // 在前一个 cons list 前面添加一个新元素
 }
 
 #[cfg(test)]
